@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Occupations</title>
+  </head>
+  <body>
+    <h1>Occupations</h1>
+    <table>
+      <tr>  
+	<th> Occupation </th> 
+	<th> Percentage </th> 
+      </tr> 
+    {% for item in collection %} 
+      <tr> 
+	<td> 
+	  {{ item }} 
+	</td> 
+	<td> 
+	  {{ item }}
+	</td> 
+     </tr> 
+    {% endfor %} 
+    </table> 
+  </body>
+</html>

@@ -1,0 +1,18 @@
+from flask import Flask #flask must be installed ( (venv)$pip install flask )
+
+app = Flask(__name__) #create Flask object
+
+#assign following fxn to run in response to root route request
+@app.route("/")
+def hello_world():
+    return "<a href='/occupations'>Click here for occupations!</a>"
+
+@app.route("/occupations")
+def occupations():
+    try:
+        doc = open(/data/occupations.csv).read().splitlines()[1:-1]
+        
+    
+
+if __name__ == "__main__": #do not run if this file is imported as module
+app.run()
