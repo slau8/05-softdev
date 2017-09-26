@@ -4,22 +4,27 @@
     <title>Occupations</title>
   </head>
   <body>
-    <h1>Occupations</h1>
+    <h1>Occupation Viewer</h1>
+    <h3>Table of occupations with percentages of people employed.</h3>
     <table>
-      <tr>  
-	<th> Occupation </th> 
-	<th> Percentage </th> 
-      </tr> 
-    {% for item in collection %} 
-      <tr> 
-	<td> 
-	  {{ item }} 
-	</td> 
-	<td> 
-	  {{ item }}
-	</td> 
-     </tr> 
-    {% endfor %} 
-    </table> 
+      <tr>
+      	<th> Occupation </th>
+      	<th> Percentage </th>
+      </tr>
+    {% for item in collection %}
+      <tr>
+	       <td>
+	          {{ item }}
+	       </td>
+	       <td>
+	          {{ item }} <!--ISSUE-->
+         </td>
+      </tr>
+      <!--{ % if loop.index is even % }{ % continue % }{ % endif % }-->
+    {% endfor %}
+    </table>
+    <p>
+      Random occupation: <b> {{ rand_occupation }} </b>
+    </p>
   </body>
 </html>

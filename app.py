@@ -1,25 +1,55 @@
-from flask import Flask, render_template #flask must be installed ( (venv)$pip install flask )
+'''
+Shannon Lau and Eugene Thomas
+SoftDev1 Period 7
+HW #05: Jinja Tuning ...
+2017-09-26
+'''
 
-app = Flask(__name__) #create Flask object
+from flask import Flask, render_template
+import random
 
-@app.route("/") #assign following fxn to run in response to root route request
+app = Flask(__name__)
+
+# landing page
+@app.route("/")
 def hello_world():
-    return "No hablo queso!"
+    return "<a href='/occupations'>View Occupations!</a>"
 
-def collection(): 
-	try: 
-		d = open(file_name).read().splitlines()[1:-1]
-	except: 
-		return "DNE" 
-	arr = [] 
-	for i in d: 
-		l = i.rsplit(',') 
-		for j in l: 
-			arr.append(j.strip())
+# occupation page
+# render template according to occupations.csv
+@app.route('/occupations')
+def occupation():
+    return render_template('occupations.html',
+                            collection=collection(),
+                            rand_occupation=rand_occupation(collection()))
 
-@app.route('/occupations') 
-def occupation(): 
- 
-	
-if __name__ == "__main__": #do not run if this file is imported as module
-	app.run()
+# return a list of all occupations and corresponding percentages
+# [occupation1, percentage1, occupation2, percentage2, ...]
+def collection():
+    try:
+        lines = open('data/occupations.csv').read().splitlines()[1:-1]
+    except:
+        return []
+    arr = []
+    for i in lines:
+        pair = i.rsplit(',',1)
+        for j in pair:
+            arr.append(j.strip('"'))
+    return arr
+
+# return a random occupation from occupations.csv, weighted based off percentages
+def rand_occupation(arr):
+    total = 0.0
+    print arr
+    for i in arr[1::2]:
+        total += float(i)
+    rand = int(random.random() * total)
+    for i in range(1,len(arr),2):
+        rand -= float(arr[i])
+        if rand < 0:
+            return arr[i - 1] + ", " + arr[i]
+
+
+if __name__ == "__main__":
+    app.debug = True
+    app.run()
