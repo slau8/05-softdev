@@ -25,6 +25,7 @@ def occupation():
 
 # return a list of all occupations and corresponding percentages
 # [occupation1, percentage1, occupation2, percentage2, ...]
+'''
 def collection():
     try:
         lines = open('data/occupations.csv').read().splitlines()[1:-1]
@@ -36,8 +37,20 @@ def collection():
         for j in pair:
             arr.append(j.strip('"'))
     return arr
+'''
+def collection():
+    try:
+        lines = open('data/occupations.csv').read().splitlines()[1:-1]
+    except:
+        return []
+    d = {}
+    for i in lines:
+        pair = i.rsplit(',',1)
+        d[pair[0]] = pair[1]
+    return d
 
 # return a random occupation from occupations.csv, weighted based off percentages
+'''
 def rand_occupation(arr):
     total = 0.0
     print arr
@@ -48,8 +61,21 @@ def rand_occupation(arr):
         rand -= float(arr[i])
         if rand < 0:
             return arr[i - 1] + ", " + arr[i]
-
+'''
+def rand_occupation(d):
+    total = 0.0
+    for i in d: 
+        total += float(d[i])
+    rand = int(random.random() * total)
+    for i in d:
+        rand -= float(d[i])
+        if rand < 0:
+            return i + ", " + d[i]
 
 if __name__ == "__main__":
     app.debug = True
     app.run()
+
+
+
+
