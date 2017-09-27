@@ -6,25 +6,35 @@
   <body>
     <h1>Occupation Viewer</h1>
     <h3>Table of occupations with percentages of people employed.</h3>
+    <!--Checks if there is an existing data file-->
+    {% if collection != {} %}
     <table>
       <tr>
       	<th> Occupation </th>
       	<th> Percentage </th>
       </tr>
-    {% for item in collection %}
+    <!--Iterates through occupations dictionary for occupation and percentage-->
+    {% for item in occupations %}
       <tr>
 
 	       <td>
+            <!--Occupation-->
 	          {{ item }}
 	       </td>
 	       <td>
-	          {{ collection[item] }} 
+            <!--Percentage-->
+	          {{ occupations[item] }}
          </td>
       </tr>
     {% endfor %}
     </table>
+    <!--Displays random occupation information-->
     <p>
       Random occupation: <b> {{ rand_occupation }} </b>
     </p>
+    <!--Error message if file does not exist-->
+    {% else %}
+    <p>ERROR: The CSV file is inaccessible.</p>
+    {% endif %}
   </body>
 </html>
