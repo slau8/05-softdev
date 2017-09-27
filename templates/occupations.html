@@ -13,15 +13,14 @@
       </tr>
     {% for item in collection %}
       <tr>
-	
+
 	       <td>
 	          {{ item }}
 	       </td>
 	       <td>
-	          {{ collection[item] }} <!--ISSUE-->
+	          {{ collection[item] }} 
          </td>
       </tr>
-      <!--{ % if loop.index is even % }{ % continue % }{ % endif % }-->
     {% endfor %}
     </table>
     <p>
