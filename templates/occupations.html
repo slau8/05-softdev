@@ -7,14 +7,14 @@
     <h1>Occupation Viewer</h1>
     <h3>Table of occupations with percentages of people employed.</h3>
     <!--Checks if there is an existing data file-->
-    {% if collection != {} %}
+    {% if collections != {} %}
     <table>
       <tr>
       	<th> Occupation </th>
       	<th> Percentage </th>
       </tr>
     <!--Iterates through occupations dictionary for occupation and percentage-->
-    {% for item in occupations %}
+    {% for item in collections %}
       <tr>
 
 	       <td>
@@ -23,7 +23,7 @@
 	       </td>
 	       <td>
             <!--Percentage-->
-	          {{ occupations[item] }}
+	          {{ collections[item] }}
          </td>
       </tr>
     {% endfor %}

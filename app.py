@@ -5,6 +5,7 @@ HW #05: Jinja Tuning ...
 2017-09-26
 '''
 
+from util import occupations
 from flask import Flask, render_template, redirect, url_for
 import random
 
@@ -21,38 +22,8 @@ def hello_world():
 @app.route('/occupations')
 def occupation():
     return render_template('occupations.html',
-                            occupations = make_occupations(),
-                            rand_occupation = rand_occupation(make_occupations()))
-
-# return a dict of all occupations and corresponding percentages
-def make_occupations():
-    # convert file into an array of each line from occupations.csv
-    try:
-        lines = open('data/occupations.csv').read().splitlines()[1:-1]
-    except:
-        return {}
-    # initialize dict
-    # occupation : percentage
-    dic = {}
-    # separate occupation and percent to add to dict
-    for i in lines:
-        pair = i.rsplit(',',1)
-        dic[pair[0].strip('"')] = pair[1]
-    return dic
-
-# return a random occupation from occupations.csv, weighted based off percentages
-def rand_occupation(dic):
-    # calculate total percentage
-    total = 0.0
-    for i in dic:
-        total += float(dic[i])
-    # generate random integer in [0,total)
-    rand = int(random.random() * total)
-    # subtract dict values from rand until less than 0
-    for i in dic:
-        rand -= float(dic[i])
-        if rand < 0:
-            return i + ", " + dic[i]
+                            collections = occupations.make_occupations(),
+                            rand_occupation = occupations.rand_occupation(occupations.make_occupations()))
 
 if __name__ == "__main__":
     app.debug = True
